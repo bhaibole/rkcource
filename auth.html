@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login / Sign Up</title>
     <link rel="stylesheet" href="style.css">
-</head>
+    </head>
 <body>
     <header>
         <div class="logo">
@@ -19,46 +19,85 @@
         </nav>
     </header>
 
-    <main class="auth-container">
-        <section class="auth-form login-form">
-            <h2>Log In</h2>
-            <form action="#" method="POST">
-                <div class="form-group">
-                    <label for="login-email">Email:</label>
-                    <input type="email" id="login-email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="login-password">Password:</label>
-                    <input type="password" id="login-password" name="password" required>
-                </div>
-                <button type="submit" class="cta-button">Log In</button>
-            </form>
-        </section>
+    <main class="auth-wrapper">
+        <div class="auth-container">
+            
+            <div class="auth-switcher">
+                <button class="switch-btn active" id="show-login">Log In</button>
+                <button class="switch-btn" id="show-signup">Sign Up</button>
+            </div>
 
-        <hr>
+            <div class="form-content">
+                <section class="auth-form login-form active-form" id="login-section">
+                    <h2>Log In</h2>
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="login-email">Email:</label>
+                            <input type="email" id="login-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password:</label>
+                            <input type="password" id="login-password" name="password" required>
+                        </div>
+                        <button type="submit" class="cta-button">Log In</button>
+                    </form>
+                </section>
 
-        <section class="auth-form signup-form">
-            <h2>Sign Up</h2>
-            <form action="#" method="POST">
-                <div class="form-group">
-                    <label for="signup-name">Full Name:</label>
-                    <input type="text" id="signup-name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="signup-email">Email:</label>
-                    <input type="email" id="signup-email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="signup-password">Password:</label>
-                    <input type="password" id="signup-password" name="password" required>
-                </div>
-                <button type="submit" class="cta-button">Sign Up</button>
-            </form>
-        </section>
+                <section class="auth-form signup-form hidden-form" id="signup-section">
+                    <h2>Sign Up</h2>
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="signup-name">Full Name:</label>
+                            <input type="text" id="signup-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-email">Email:</label>
+                            <input type="email" id="signup-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-password">Password:</label>
+                            <input type="password" id="signup-password" name="password" required>
+                        </div>
+                        <button type="submit" class="cta-button">Sign Up</button>
+                    </form>
+                </section>
+            </div>
+            
+        </div>
     </main>
 
     <footer>
         <p>&copy; 2025 Educational Platform. All rights reserved.</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginBtn = document.getElementById('show-login');
+            const signupBtn = document.getElementById('show-signup');
+            const loginSection = document.getElementById('login-section');
+            const signupSection = document.getElementById('signup-section');
+
+            function showForm(formToShow, formToHide, activeBtn, inactiveBtn) {
+                // Toggle forms
+                formToShow.classList.add('active-form');
+                formToShow.classList.remove('hidden-form');
+                
+                formToHide.classList.add('hidden-form');
+                formToHide.classList.remove('active-form');
+
+                // Toggle buttons
+                activeBtn.classList.add('active');
+                inactiveBtn.classList.remove('active');
+            }
+
+            loginBtn.addEventListener('click', function() {
+                showForm(loginSection, signupSection, loginBtn, signupBtn);
+            });
+
+            signupBtn.addEventListener('click', function() {
+                showForm(signupSection, loginSection, signupBtn, loginBtn);
+            });
+        });
+    </script>
 </body>
 </html>
